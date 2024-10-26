@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -15,7 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PreviousQuestions : Fragment() {
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MyAdapter
     private var solvedQuestionsList: List<UserDetails> = emptyList()
@@ -30,6 +31,13 @@ class PreviousQuestions : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Handle back press to navigate to HomeFragment
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigate(R.id.homeFragment)
+            }
+        })
+
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = MyAdapter(requireContext(), solvedQuestionsList)
@@ -39,7 +47,7 @@ class PreviousQuestions : Fragment() {
     }
 
     private fun fetchSolvedQuestions() {
-        val username = UserDetailsSingleton.userDetails.username // Get the username from the singleton
+        val username = UserDetailsSingleton.userDetails.username
         val retrofit = Retrofit.Builder()
             .baseUrl("https://alfa-leetcode-api.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())

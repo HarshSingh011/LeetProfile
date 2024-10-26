@@ -1,16 +1,15 @@
 package com.example.leetprofile
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.leetprofile.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,53 +21,44 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setSupportActionBar(binding.toolbar)
 
-        // Initialize the ActionBarDrawerToggle
-        val toggle = ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout,
-            binding.toolbar,
-            R.string.nav_open,
-            R.string.nav_close
-        )
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph) as NavHostFragment
+        val navController = navHostFragment.navController
 
-        binding.navigationDrawer.setNavigationItemSelectedListener(this)
+        NavigationUI.setupWithNavController(binding.navigationDrawer, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.home -> openFragment(Profile())
-                R.id.acc -> openFragment(Ent_user())
-                R.id.ques -> openFragment(PreviousQuestions())
+                R.id.home -> {
+                    navController.navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.acc-> {
+                    navController.navigate(R.id.ent_user)
+                    true
+                }
+                R.id.ques -> {
+                    navController.navigate(R.id.previousQuestions)
+                    true
+                }
+                else -> false
             }
+        }
+
+        navController.navigate(R.id.homeFragment)
+        binding.navigationDrawer.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> navController.navigate(R.id.homeFragment)
+                R.id.acc -> navController.navigate(R.id.ent_user)
+                R.id.ques -> navController.navigate(R.id.previousQuestions)
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
-
-        openFragment(Profile())
     }
 
-    private fun openFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container, fragment)
-            commit()
-        }
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> openFragment(Profile())
-            R.id.acc -> openFragment(Ent_user())
-            R.id.ques -> openFragment(PreviousQuestions())
-        }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_graph)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

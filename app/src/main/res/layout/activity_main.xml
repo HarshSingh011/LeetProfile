@@ -8,6 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <fragment
+        android:id="@+id/nav_graph"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:navGraph="@navigation/nav_graph" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,7 +25,6 @@
             android:layout_height="?attr/actionBarSize"
             android:elevation="4dp"
             android:layout_marginTop="40dp"/>
-
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"

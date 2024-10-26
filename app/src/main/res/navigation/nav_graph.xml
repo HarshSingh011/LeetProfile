@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.leetprofile.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/ent_user"
+        android:name="com.example.leetprofile.Ent_user"
+        android:label="fragment_ent_user"
+        tools:layout="@layout/fragment_ent_user" />
+
+    <fragment
+        android:id="@+id/previousQuestions"
+        android:name="com.example.leetprofile.PreviousQuestions"
+        android:label="fragment_previous_questions"
+        tools:layout="@layout/fragment_previous_questions" />
+</navigation>
