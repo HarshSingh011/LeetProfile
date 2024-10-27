@@ -13,9 +13,10 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:gravity="center"
             android:id="@+id/homeTitle"
             android:fontFamily="@font/poppins_black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             android:text="Badges Collected"
@@ -27,9 +28,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/badgesUser"
             android:fontFamily="@font/poppins_black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="Badges:"
@@ -42,7 +44,8 @@
         <TextView
             android:id="@+id/badgesCount"
             android:fontFamily="@font/poppins_black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Badges Count:"
@@ -53,9 +56,10 @@
             app:layout_constraintTop_toBottomOf="@id/badgesUser" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/upcomingBadges"
             android:fontFamily="@font/poppins_black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Upcoming Badges:"
@@ -66,9 +70,10 @@
             app:layout_constraintTop_toBottomOf="@id/badgesCount" />
 
         <TextView
+            android:gravity="center"
             android:id="@+id/activeBadge"
             android:fontFamily="@font/poppins_black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Active Badge:"

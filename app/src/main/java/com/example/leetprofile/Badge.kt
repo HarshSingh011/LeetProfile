@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.net.HttpRetryException
 
 class BadgeFragment : Fragment() {
     private lateinit var badgesUser: TextView
@@ -39,12 +37,22 @@ class BadgeFragment : Fragment() {
 
                 println("Badges Response: $badgesResponse")
 
-                badgesUser.text = "Badges: ${badgesResponse.badges.joinToString(", ") { it.displayName }}"
-                badgesCount.text = "Badges Count: ${badgesResponse.badgesCount}"
-                upcomingBadges.text = "Upcoming Badges: ${badgesResponse.upcomingBadges.joinToString(", ") { it.name }}"
-                activeBadge.text = "Active Badge: ${badgesResponse.activeBadge.displayName}"
+                // Show badges list or "No badges available" if empty
+                val badgesText = badgesResponse.badges.takeIf { it.isNotEmpty() }?.joinToString(", ") { it.displayName }
+                    ?: "No badges available"
+                badgesUser.text = "Badges: $badgesText"
 
-            }catch (e: Exception) {
+                // Show badge count or 0 if badges are null or empty
+                badgesCount.text = "Badges Count: ${badgesResponse.badges.size}"
+
+                // Show upcoming badges list or "No upcoming badges" if empty
+                val upcomingText = badgesResponse.upcomingBadges.takeIf { it.isNotEmpty() }?.joinToString(", ") { it.name }
+                    ?: "No upcoming badges"
+                upcomingBadges.text = "Upcoming Badges: $upcomingText"
+
+                activeBadge.text = "Active Badge: ${badgesResponse.activeBadge?.displayName ?: "NULL"}"
+
+            } catch (e: Exception) {
                 println("Error: $e")
                 badgesUser.text = "An error occurred: ${e.message}"
             }
