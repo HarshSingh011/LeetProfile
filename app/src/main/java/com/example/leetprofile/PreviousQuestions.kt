@@ -42,8 +42,6 @@ class PreviousQuestions : Fragment() {
                 mediumSolvedTextView.text = "Medium Solved: ${problemStatsResponse.mediumSolved}"
                 hardSolvedTextView.text = "Hard Solved: ${problemStatsResponse.hardSolved}"
 
-            } catch (e: HttpException) {
-                solvedProblemsTextView.text = "Failed to load data: ${e.message()}"
             } catch (e: Exception) {
                 solvedProblemsTextView.text = "An error occurred: $e"
             }

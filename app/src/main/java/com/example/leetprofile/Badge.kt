@@ -44,15 +44,9 @@ class BadgeFragment : Fragment() {
                 upcomingBadges.text = "Upcoming Badges: ${badgesResponse.upcomingBadges.joinToString(", ") { it.name }}"
                 activeBadge.text = "Active Badge: ${badgesResponse.activeBadge.displayName}"
 
-            } catch (e: HttpException) {
-                println("HTTP Error: ${e.code()} - ${e.message()}")
-                badgesUser.text = "Failed to load data: ${e.message()}"
-            } catch (e: Exception) {
+            }catch (e: Exception) {
                 println("Error: $e")
                 badgesUser.text = "An error occurred: ${e.message}"
-            } catch (e: HttpRetryException) {
-                println("Retry Exception: $e")
-                badgesUser.text = "Retrying failed: ${e.message}"
             }
         }
     }

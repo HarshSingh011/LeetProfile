@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/submissionFragment"
-        android:name="com.example.leetprofile.submission"
+        android:name="com.example.leetprofile.Submission"
         android:label="fragment_submission"
         tools:layout="@layout/fragment_submission" />
 

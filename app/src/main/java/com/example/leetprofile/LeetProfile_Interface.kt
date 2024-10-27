@@ -13,5 +13,8 @@ interface LeetProfile_Interface {
     @GET("{username}")
     suspend fun getUserProfile(@Path("username") username: String): account
 
+    @GET("{username}/submission")
+    suspend fun getSubmission(@Path("username") username: String): SubmissionResponse
+
 }
 

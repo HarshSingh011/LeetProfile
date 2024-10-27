@@ -24,13 +24,11 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Initialize the TextViews
         usernameTextView = view.findViewById(R.id.usernameTextView)
         nameTextView = view.findViewById(R.id.nameTextView)
         birthdayTextView = view.findViewById(R.id.birthdayTextView)
         rankingTextView = view.findViewById(R.id.rankingTextView)
 
-        // Call the API
         apiCall("harshroot12")
 
         return view
@@ -48,15 +46,9 @@ class HomeFragment : Fragment() {
                 birthdayTextView.text = "Birthday: ${profileResponse.birthday ?: "N/A"}"
                 rankingTextView.text = "Ranking: ${profileResponse.ranking}"
 
-            } catch (e: HttpException) {
-                println("HTTP Error: ${e.code()} - ${e.message()}")
-                Toast.makeText(context, "Failed to load data: ${e.message()}", Toast.LENGTH_SHORT).show()
-            } catch (e: Exception) {
+            }  catch (e: Exception) {
                 println("Error: $e")
                 Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
-            } catch (e: HttpRetryException) {
-                println("Retry Exception: $e")
-                Toast.makeText(context, "Retrying failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

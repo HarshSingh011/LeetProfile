@@ -16,48 +16,64 @@
             android:fontFamily="@font/poppins_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Home"
+            android:layout_marginTop="150dp"
+            android:text="User Profile"
             android:textAlignment="center"
-            android:textColor="#1F41BB"
-            android:textSize="30sp"
+            android:textColor="@color/orange"
+            android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/poppins_black"
+            android:gravity="center"
             android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
             android:text="Username: "
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/HomeTextView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:fontFamily="@font/poppins_black"
+            android:textSize="20sp"
+            android:gravity="center"
             android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Name: "
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/usernameTextView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:fontFamily="@font/poppins_black"
+            android:textSize="20sp"
+            android:gravity="center"
             android:id="@+id/birthdayTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Birthday: "
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/nameTextView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:fontFamily="@font/poppins_black"
+            android:textSize="20sp"
+            android:gravity="center"
             android:id="@+id/rankingTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Ranking: "
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/birthdayTextView"
             app:layout_constraintStart_toStartOf="parent" />
 

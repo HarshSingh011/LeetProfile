@@ -9,7 +9,7 @@
     app:cardElevation="5dp"
     app:cardCornerRadius="20dp"
     android:layout_margin="9dp"
-    android:id="@+id/cardItem"
+    android:id="@+id/textViewTitle"
     >
 
     <LinearLayout
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:textStyle="bold"
             android:textSize="16dp"
-            android:id="@+id/content"
+            android:id="@+id/titleTextView"
             android:layout_margin="10dp"
             android:text="leetcode questions"
             android:layout_gravity="center">
