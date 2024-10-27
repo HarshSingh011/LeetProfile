@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(binding.navigationDrawer, navController)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        // Remove the following line to disable the back button
+        // NavigationUI.setupActionBarWithNavController(this, navController)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -96,9 +97,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.selectedItemId = itemId
     }
 
+    // Override this method to do nothing
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_graph)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return false // Do not allow navigating up
     }
 
     override fun onBackPressed() {

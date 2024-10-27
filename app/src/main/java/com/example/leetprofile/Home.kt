@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -18,6 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var birthdayTextView: TextView
     private lateinit var rankingTextView: TextView
 
+    private val userViewModel: UserViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +31,9 @@ class HomeFragment : Fragment() {
         birthdayTextView = view.findViewById(R.id.birthdayTextView)
         rankingTextView = view.findViewById(R.id.rankingTextView)
 
-        apiCall("harshroot12")
+        userViewModel.username.observe(viewLifecycleOwner) { username ->
+            apiCall(username)
+        }
 
         return view
     }
@@ -38,8 +42,6 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val profileResponse = RetrofitClientInstance.api.getUserProfile(username)
-
-                println("Profile Response: $profileResponse")
 
                 usernameTextView.text = "Username: ${profileResponse.username}"
                 nameTextView.text = "Name: ${profileResponse.name}"

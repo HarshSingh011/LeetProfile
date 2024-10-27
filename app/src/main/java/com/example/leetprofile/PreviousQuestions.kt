@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -16,6 +17,7 @@ class PreviousQuestions : Fragment() {
     private lateinit var mediumSolvedTextView: TextView
     private lateinit var hardSolvedTextView: TextView
 
+    private val userViewModel: UserViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +29,10 @@ class PreviousQuestions : Fragment() {
         mediumSolvedTextView = view.findViewById(R.id.mediumSolvedTextView)
         hardSolvedTextView = view.findViewById(R.id.hardSolvedTextView)
 
-        apiCall("harshroot12")
+        userViewModel.username.observe(viewLifecycleOwner) { username ->
+            apiCall(username)
+        }
+
 
         return view
     }

@@ -25,6 +25,7 @@
             android:layout_height="?attr/actionBarSize"
             android:elevation="4dp"
             android:layout_marginTop="40dp"/>
+
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
