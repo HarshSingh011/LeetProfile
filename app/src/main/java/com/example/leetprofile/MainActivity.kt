@@ -97,9 +97,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.selectedItemId = itemId
     }
 
-    // Override this method to do nothing
     override fun onSupportNavigateUp(): Boolean {
-        return false // Do not allow navigating up
+        return false
     }
 
     override fun onBackPressed() {
