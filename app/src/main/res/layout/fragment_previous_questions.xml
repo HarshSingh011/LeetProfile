@@ -7,44 +7,70 @@
     tools:context=".PreviousQuestions">
 
     <TextView
+        android:id="@+id/HomeTextView"
+        android:fontFamily="@font/poppins_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="User Profile"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/solvedProblemsTextView"
+        android:fontFamily="@font/poppins_black"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Solved Problems:"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="240dp"/>
 
     <TextView
         android:id="@+id/easySolvedTextView"
+        android:fontFamily="@font/poppins_black"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Easy Solved: "
         app:layout_constraintTop_toBottomOf="@id/solvedProblemsTextView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/mediumSolvedTextView"
+        android:fontFamily="@font/poppins_black"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Medium Solved: "
         app:layout_constraintTop_toBottomOf="@id/easySolvedTextView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/hardSolvedTextView"
+        android:fontFamily="@font/poppins_black"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hard Solved: "
         app:layout_constraintTop_toBottomOf="@id/mediumSolvedTextView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
