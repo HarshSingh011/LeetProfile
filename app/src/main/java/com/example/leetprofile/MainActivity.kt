@@ -29,36 +29,84 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.home -> {
-                    navController.navigate(R.id.homeFragment)
+                R.id.acc -> {
+                    navController.navigate(R.id.ent_user)
+                    selectDrawerItem(R.id.acc)
                     true
                 }
-                R.id.acc-> {
-                    navController.navigate(R.id.ent_user)
+                R.id.profile -> {
+                    navController.navigate(R.id.homeFragment)
+                    selectDrawerItem(R.id.profile)
+                    true
+                }
+                R.id.home -> {
+                    navController.navigate(R.id.badgeFragment)
+                    selectDrawerItem(R.id.home)
                     true
                 }
                 R.id.ques -> {
                     navController.navigate(R.id.previousQuestions)
+                    selectDrawerItem(R.id.ques)
+                    true
+                }
+                R.id.sub -> {
+                    navController.navigate(R.id.submissionFragment)
+                    selectDrawerItem(R.id.sub)
                     true
                 }
                 else -> false
             }
         }
 
-        navController.navigate(R.id.homeFragment)
         binding.navigationDrawer.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.home -> navController.navigate(R.id.homeFragment)
-                R.id.acc -> navController.navigate(R.id.ent_user)
-                R.id.ques -> navController.navigate(R.id.previousQuestions)
+                R.id.acc -> {
+                    navController.navigate(R.id.ent_user)
+                    selectBottomItem(R.id.acc)
+                }
+                R.id.profile -> {
+                    navController.navigate(R.id.homeFragment)
+                    selectBottomItem(R.id.profile)
+                }
+                R.id.home -> {
+                    navController.navigate(R.id.badgeFragment)
+                    selectBottomItem(R.id.home)
+                }
+                R.id.ques -> {
+                    navController.navigate(R.id.previousQuestions)
+                    selectBottomItem(R.id.ques)
+                }
+                R.id.sub -> {
+                    navController.navigate(R.id.submissionFragment)
+                    selectBottomItem(R.id.sub)
+                }
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+
+        navController.navigate(R.id.ent_user)
+    }
+
+    private fun selectDrawerItem(itemId: Int) {
+        binding.navigationDrawer.menu.findItem(itemId).isChecked = true
+    }
+
+    private fun selectBottomItem(itemId: Int) {
+        binding.bottomNavigation.selectedItemId = itemId
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_graph)
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.nav_graph)
+        if (navController.currentDestination?.id != R.id.ent_user) {
+            navController.navigate(R.id.ent_user)
+        } else {
+            super.onBackPressed()
+        }
     }
 }

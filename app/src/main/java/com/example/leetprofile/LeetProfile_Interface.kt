@@ -1,11 +1,17 @@
 package com.example.leetprofile
 
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface LeetProfile_Interface {
+    @GET("{username}/badges")
+    suspend fun getBadges(@Path("username") username: String): BadgesResponse
+
     @GET("{username}/solved")
-    fun getSolvedProblems(@Path("username") username: String): Call<List<UserDetails>>
+    suspend fun getProblemStats(@Path("username") username: String): solved
+
+    @GET("{username}")
+    suspend fun getUserProfile(@Path("username") username: String): account
+
 }
+

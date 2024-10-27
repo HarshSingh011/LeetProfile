@@ -22,4 +22,17 @@
         android:name="com.example.leetprofile.PreviousQuestions"
         android:label="fragment_previous_questions"
         tools:layout="@layout/fragment_previous_questions" />
+
+    <fragment
+        android:id="@+id/badgeFragment"
+        android:name="com.example.leetprofile.BadgeFragment"
+        android:label="fragment_badge"
+        tools:layout="@layout/fragment_badge" />
+
+    <fragment
+        android:id="@+id/submissionFragment"
+        android:name="com.example.leetprofile.submission"
+        android:label="fragment_submission"
+        tools:layout="@layout/fragment_submission" />
+
 </navigation>

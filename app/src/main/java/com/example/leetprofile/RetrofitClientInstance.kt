@@ -4,15 +4,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClientInstance {
-    private var retrofit: Retrofit? = null
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(Utility.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
-    fun getRetrofitInstance(): Retrofit {
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl("https://alfa-leetcode-api.onrender.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-        return retrofit!!
+    val api: LeetProfile_Interface by lazy {
+        retrofit.create(LeetProfile_Interface::class.java)
     }
 }
