@@ -1,25 +1,30 @@
 package com.example.leetprofile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.net.HttpRetryException
 
-class HomeFragment : Fragment() {
+class Home : Fragment() {
     private lateinit var usernameTextView: TextView
     private lateinit var nameTextView: TextView
     private lateinit var birthdayTextView: TextView
     private lateinit var rankingTextView: TextView
 
     private val userViewModel: UserViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,6 +39,8 @@ class HomeFragment : Fragment() {
         userViewModel.username.observe(viewLifecycleOwner) { username ->
             apiCall(username)
         }
+
+        Log.d("Home", "onCreateView")
 
         return view
     }
@@ -53,5 +60,10 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun navigateToEntUser() {
+        findNavController().popBackStack(R.id.homeFragment, true)
+        findNavController().navigate(R.id.ent_user)
     }
 }

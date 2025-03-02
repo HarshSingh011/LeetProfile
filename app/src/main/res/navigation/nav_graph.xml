@@ -7,9 +7,10 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.leetprofile.HomeFragment"
+        android:name="com.example.leetprofile.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
 
     <fragment
         android:id="@+id/ent_user"
@@ -25,9 +26,10 @@
 
     <fragment
         android:id="@+id/badgeFragment"
-        android:name="com.example.leetprofile.BadgeFragment"
+        android:name="com.example.leetprofile.Badge"
         android:label="fragment_badge"
-        tools:layout="@layout/fragment_badge" />
+        tools:layout="@layout/fragment_badge" >
+    </fragment>
 
     <fragment
         android:id="@+id/submissionFragment"

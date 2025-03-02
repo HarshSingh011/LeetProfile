@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.Gson // Make sure to import Gson
+import androidx.navigation.fragment.findNavController
+import com.example.leetprofile.Dataclasses.BadgesResponse
 import kotlinx.coroutines.launch
 
-class BadgeFragment : Fragment() {
+class Badge : Fragment() {
     private lateinit var badgesUser: TextView
     private lateinit var badgesCount: TextView
     private lateinit var upcomingBadges: TextView
@@ -58,5 +60,10 @@ class BadgeFragment : Fragment() {
                 badgesUser.text = "An error occurred: ${e.message}"
             }
         }
+    }
+
+    private fun navigateToEntUser() {
+        findNavController().popBackStack(R.id.homeFragment, true)
+        findNavController().navigate(R.id.ent_user)
     }
 }

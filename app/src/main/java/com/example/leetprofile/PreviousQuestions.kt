@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -33,7 +35,6 @@ class PreviousQuestions : Fragment() {
             apiCall(username)
         }
 
-
         return view
     }
 
@@ -51,5 +52,10 @@ class PreviousQuestions : Fragment() {
                 solvedProblemsTextView.text = "An error occurred: $e"
             }
         }
+    }
+
+    private fun navigateToEntUser() {
+        findNavController().popBackStack(R.id.homeFragment, true)
+        findNavController().navigate(R.id.ent_user)
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.leetprofile.Dataclasses.Title
 
 class SubmissionAdapter(private val submissions: List<Title>) :
     RecyclerView.Adapter<SubmissionAdapter.SubmissionViewHolder>() {

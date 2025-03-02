@@ -1,4 +1,4 @@
-package com.example.leetprofile
+package com.example.leetprofile.Dataclasses
 
 data class solved(
     val solvedProblem: Int,

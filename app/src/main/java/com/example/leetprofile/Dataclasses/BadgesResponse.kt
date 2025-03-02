@@ -1,4 +1,4 @@
-package com.example.leetprofile
+package com.example.leetprofile.Dataclasses
 
 data class BadgesResponse(
     val activeBadge: Bgs,

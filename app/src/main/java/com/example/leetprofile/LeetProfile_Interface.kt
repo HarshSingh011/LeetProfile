@@ -1,5 +1,8 @@
 package com.example.leetprofile
 
+import com.example.leetprofile.Dataclasses.BadgesResponse
+import com.example.leetprofile.Dataclasses.account
+import com.example.leetprofile.Dataclasses.solved
 import retrofit2.http.GET
 import retrofit2.http.Path
 
