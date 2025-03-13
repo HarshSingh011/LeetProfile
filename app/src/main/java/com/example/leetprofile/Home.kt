@@ -7,15 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.net.HttpRetryException
 
 class Home : Fragment() {
     private lateinit var usernameTextView: TextView
@@ -36,34 +30,30 @@ class Home : Fragment() {
         birthdayTextView = view.findViewById(R.id.birthdayTextView)
         rankingTextView = view.findViewById(R.id.rankingTextView)
 
-        userViewModel.username.observe(viewLifecycleOwner) { username ->
-            apiCall(username)
-        }
+        setupObservers()
 
         Log.d("Home", "onCreateView")
 
         return view
     }
 
-    private fun apiCall(username: String) {
-        lifecycleScope.launch {
-            try {
-                val profileResponse = RetrofitClientInstance.api.getUserProfile(username)
-
-                usernameTextView.text = "Username: ${profileResponse.username}"
-                nameTextView.text = "Name: ${profileResponse.name}"
-                birthdayTextView.text = "Birthday: ${profileResponse.birthday ?: "N/A"}"
-                rankingTextView.text = "Ranking: ${profileResponse.ranking}"
-
-            }  catch (e: Exception) {
-                println("Error: $e")
-                Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+    private fun setupObservers() {
+        userViewModel.userProfile.observe(viewLifecycleOwner) { profile ->
+            updateUI(profile)
         }
+
+//         Observe error state
+//        userViewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+//            errorMessage?.let {
+//                Toast.makeText(context, "Error: $it", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
-    private fun navigateToEntUser() {
-        findNavController().popBackStack(R.id.homeFragment, true)
-        findNavController().navigate(R.id.ent_user)
+    private fun updateUI(profile: com.example.leetprofile.Dataclasses.account) {
+        usernameTextView.text = "Username: ${profile.username}"
+        nameTextView.text = "Name: ${profile.name}"
+        birthdayTextView.text = "Birthday: ${profile.birthday ?: "N/A"}"
+        rankingTextView.text = "Ranking: ${profile.ranking}"
     }
 }

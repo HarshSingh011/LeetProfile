@@ -19,13 +19,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        setSupportActionBar(binding.toolbar)
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph) as NavHostFragment
         val navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(binding.navigationDrawer, navController)
-//        NavigationUI.setupActionBarWithNavController(this, navController)
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {

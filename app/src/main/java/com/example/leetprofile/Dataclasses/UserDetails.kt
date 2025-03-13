@@ -15,3 +15,7 @@ data class UserDetails(
     val Method: String?,
     val description: String?
 )
+
+data class SubmissionResponse(
+    val submission: List<Title>
+)

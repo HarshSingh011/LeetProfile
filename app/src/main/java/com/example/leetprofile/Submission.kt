@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
+import com.example.leetprofile.Dataclasses.SubmissionResponse
 
 class Submission : Fragment() {
 
@@ -29,31 +27,26 @@ class Submission : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        userViewModel.username.observe(viewLifecycleOwner) { username ->
-            apiCall(username)
-        }
+        setupObservers()
 
         return view
     }
 
-    private fun apiCall(username: String) {
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClientInstance.api.getSubmission(username)
+    private fun setupObservers() {
+        userViewModel.submissions.observe(viewLifecycleOwner) { submissionResponse ->
+            updateUI(submissionResponse)
+        }
 
-                val submissions = response.submission
-
-                submissionAdapter = SubmissionAdapter(submissions)
-                recyclerView.adapter = submissionAdapter
-
-            }catch (e: Exception) {
-                e.printStackTrace()
+        userViewModel.submissionsError.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(context, "Error: $it", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun navigateToEntUser() {
-        findNavController().popBackStack(R.id.homeFragment, true)
-        findNavController().navigate(R.id.ent_user)
+    private fun updateUI(submissionResponse: SubmissionResponse) {
+        val submissions = submissionResponse.submission
+        submissionAdapter = SubmissionAdapter(submissions)
+        recyclerView.adapter = submissionAdapter
     }
 }

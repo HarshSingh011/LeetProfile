@@ -5,13 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import com.example.leetprofile.Dataclasses.ProblemStatsResponse
 
 class PreviousQuestions : Fragment() {
     private lateinit var solvedProblemsTextView: TextView
@@ -20,6 +17,7 @@ class PreviousQuestions : Fragment() {
     private lateinit var hardSolvedTextView: TextView
 
     private val userViewModel: UserViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,31 +29,31 @@ class PreviousQuestions : Fragment() {
         mediumSolvedTextView = view.findViewById(R.id.mediumSolvedTextView)
         hardSolvedTextView = view.findViewById(R.id.hardSolvedTextView)
 
-        userViewModel.username.observe(viewLifecycleOwner) { username ->
-            apiCall(username)
-        }
+        setupObservers()
 
         return view
     }
 
-    private fun apiCall(username: String) {
-        lifecycleScope.launch {
-            try {
-                val problemStatsResponse = RetrofitClientInstance.api.getProblemStats(username)
+    private fun setupObservers() {
+        userViewModel.problemStats.observe(viewLifecycleOwner) { problemStats ->
+            updateUI(problemStats)
+        }
 
-                solvedProblemsTextView.text = "Solved Problems: ${problemStatsResponse.solvedProblem}"
-                easySolvedTextView.text = "Easy Solved: ${problemStatsResponse.easySolved}"
-                mediumSolvedTextView.text = "Medium Solved: ${problemStatsResponse.mediumSolved}"
-                hardSolvedTextView.text = "Hard Solved: ${problemStatsResponse.hardSolved}"
-
-            } catch (e: Exception) {
-                solvedProblemsTextView.text = "An error occurred: $e"
+        userViewModel.problemStatsError.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(context, "Error: $it", Toast.LENGTH_SHORT).show()
+                solvedProblemsTextView.text = "An error occurred: $it"
+                easySolvedTextView.text = ""
+                mediumSolvedTextView.text = ""
+                hardSolvedTextView.text = ""
             }
         }
     }
 
-    private fun navigateToEntUser() {
-        findNavController().popBackStack(R.id.homeFragment, true)
-        findNavController().navigate(R.id.ent_user)
+    private fun updateUI(problemStats: ProblemStatsResponse) {
+        solvedProblemsTextView.text = "Solved Problems: ${problemStats.solvedProblem}"
+        easySolvedTextView.text = "Easy Solved: ${problemStats.easySolved}"
+        mediumSolvedTextView.text = "Medium Solved: ${problemStats.mediumSolved}"
+        hardSolvedTextView.text = "Hard Solved: ${problemStats.hardSolved}"
     }
 }
