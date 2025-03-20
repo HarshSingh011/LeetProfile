@@ -35,9 +35,6 @@ LeetProfile relies on the following key dependencies:
 - **Coroutines**: A concurrency design pattern in Kotlin, Coroutines simplify asynchronous programming by providing structured concurrency. They manage background tasks efficiently, reducing boilerplate code and ensuring smooth execution of long-running operations like network requests.
 - **LiveData**: A lifecycle-aware data holder for Android, LiveData ensures UI components receive updates when data changes, reducing memory leaks and improving efficiency in reactive programming.
 - **ViewModel**: A lifecycle-conscious component in Android, ViewModel stores and manages UI-related data, surviving configuration changes and ensuring data persistence across activity and fragment lifecycles.
--**ImagePicker**: A flexible library for Android, ImagePicker simplifies selecting images from the gallery or capturing photos using the camera.
-- **Datastore Preferences**: For local storage of tokens and their expiry times.
-- **Glide**: For efficient image loading .
 
 ### Contributing
 Contributions to LeetProfile are welcome! To contribute:
